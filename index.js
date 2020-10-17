@@ -55,9 +55,11 @@ program
   .command('init [template]')
   .description('初始化一个模板')
   .alias('use')
-  .action(template => {
+  .option('-u, --update', '是否要检查更新模板')
+  .action((template, cmd) => {
     checkTemplatePath()
-    require('./script/init')({ packageName: template, templatePath })
+    const args = cleanArgs(cmd)
+    require('./script/init')({ packageName: template, templatePath, shouldUpdate: args.update })
   })
 
 program
