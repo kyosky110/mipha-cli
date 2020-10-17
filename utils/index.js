@@ -53,6 +53,12 @@ function getInstalledStatus(packageName, targetDir) {
   return 1
 }
 
+function isIncludeForPackage(packageName, targetDir) {
+  const dependencies = getInstalledPkgs(targetDir)
+  if (!dependencies[packageName]) return false
+  return true
+}
+
 /**
  * 获取路径下的模板包
  * @param {*} targetDir 
@@ -60,47 +66,11 @@ function getInstalledStatus(packageName, targetDir) {
 function getInstalledTemplates(targetDir) {
   const dependencies = getInstalledPkgs(targetDir)
   // Object.keys(dependencies).forEach(item => {
-  //   if (!item.match(/^mipha-/)) {
+  //   if (!item.match(/^miphacli@\//)) {
   //     delete dependencies[item]
   //   }
   // })
   return dependencies
-}
-
-/**
- * 获取自定义构建的配置文件
- */
-function getConfigs() {
-  const configs = requireFrom(process.cwd(), './maoda.js')
-  if (!configs || !configs.builder) {
-    log('请确保工程根路径下有 maoda.js 文件，且文件中配置了 builder 属性', 'red')
-    process.exit(1)
-  }
-  return configs
-}
-
-/**
- * 获取build，如果没安装则安装
- */
-function getBuilderFn() {
-  const { builder } = getConfigs()
-  const status = getInstalledStatus(builder, process.cwd())
-  switch (status) {
-    case 0:
-      log(`检测到工程并未添加${builder}，将自动为您安装最新版`, 'red')
-      log(`安装${builder}中...`)
-      execSync(
-        `npm i ${builder}@latest -S --registry=https://registry.npm.taobao.org`,
-        { cwd: process.cwd() }
-      )
-      break
-    case 1:
-      log(`检测到您的${builder}并非最新版，推荐在工程下 npm i ${builder}@latest -S 进行更新`)
-      break
-    default:
-      break
-  }
-  return requireFrom(process.cwd(), builder)
 }
 
 module.exports = {
@@ -109,6 +79,5 @@ module.exports = {
   getVersionForFetch,
   getInstalledStatus,
   getInstalledTemplates,
-  getConfigs,
-  getBuilderFn
+  isIncludeForPackage
 }

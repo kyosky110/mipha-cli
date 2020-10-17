@@ -35,7 +35,7 @@ function checkTemplatePath() {
   }
 }
 
-checkCliVersion()
+// checkCliVersion()
 const program = require('commander')
 program
   .version(`mipha/cli ${require('./package').version}`)
@@ -54,6 +54,7 @@ program
 program
   .command('init [template]')
   .description('初始化一个模板')
+  .alias('use')
   .action(template => {
     checkTemplatePath()
     require('./script/init')({ packageName: template, templatePath })
@@ -66,6 +67,30 @@ program
   .action(template => {
     checkTemplatePath()
     require('./script/install')({ packageName: template, templatePath })
+  })
+
+program
+  .command('uninstall <template>')
+  .description('删除一个模板')
+  .alias('d')
+  .action(template => {
+    checkTemplatePath()
+    require('./script/uninstall')({ packageName: template, templatePath })
+  })
+
+program
+  .command('ls')
+  .description('查看当前安装的模板')
+  .action(() => {
+    checkTemplatePath()
+    require('./script/ls')(templatePath)
+  })
+
+program
+  .command('update')
+  .description('检查更新cli')
+  .action(() => {
+    require('./script/update')({ packageName: package.name, packageVersion: package.version, templatePath})
   })
 
 // TODO 取消构建功能，暂时没有需要用到的情况
