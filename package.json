@@ -1,12 +1,26 @@
 {
   "name": "mipha-cli",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.1-dev",
+  "description": "脚手架cli工具",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "micli": "./bin/micli"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "import-from": "^3.0.0",
+    "inquirer": "^7.1.0",
+    "minimist": "^1.2.5",
+    "mkdirp": "^1.0.4",
+    "osenv": "^0.1.5",
+    "resolve-from": "^5.0.0",
+    "yeoman-environment": "^2.10.3"
+  }
 }
