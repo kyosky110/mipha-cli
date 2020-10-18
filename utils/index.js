@@ -66,11 +66,17 @@ function isIncludeForPackage(packageName, targetDir) {
 function getInstalledTemplates(targetDir) {
   const dependencies = getInstalledPkgs(targetDir)
   // Object.keys(dependencies).forEach(item => {
-  //   if (!item.match(/^miphacli@\//)) {
+  //   if (!item.match(/^miphacli-/)) {
   //     delete dependencies[item]
   //   }
   // })
   return dependencies
+}
+
+function getPackageName(name) {
+
+  return name.match(/^miphacli-/) ? 
+  name : `miphacli-${name}`
 }
 
 module.exports = {
@@ -79,5 +85,6 @@ module.exports = {
   getVersionForFetch,
   getInstalledStatus,
   getInstalledTemplates,
-  isIncludeForPackage
+  isIncludeForPackage,
+  getPackageName
 }

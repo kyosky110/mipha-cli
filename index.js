@@ -41,15 +41,16 @@ program
   .version(`mipha/cli ${require('./package').version}`)
   .usage('<command> [options]')
 
-program
-  .command('create <app-name>')
-  .description('create a new project powered by vue-cli-service')
-  .option('-p, --preset <presetName>', 'Skip prompts and use saved or remote preset')
-  .action((name, cmd) => {
-    console.log('action')
-    console.log(name)
-    console.log(cleanArgs(cmd))
-  })
+// 移除
+// program
+//   .command('create <app-name>')
+//   .description('create a new project powered by vue-cli-service')
+//   .option('-p, --preset <presetName>', 'Skip prompts and use saved or remote preset')
+//   .action((name, cmd) => {
+//     console.log('action')
+//     console.log(name)
+//     console.log(cleanArgs(cmd))
+//   })
 
 program
   .command('init [template]')

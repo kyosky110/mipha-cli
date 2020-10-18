@@ -1,8 +1,8 @@
-const { log } = require('../utils')
+const { log, getPackageName } = require('../utils')
 const execSync = require('child_process').execSync
 
 module.exports = async function (params) { 
-  const packageName = params.packageName
+  const packageName = getPackageName(params.packageName)
   log(`正在删除 ${packageName} ...`)
   try {
     execSync(`npm uninstall ${packageName}`, 

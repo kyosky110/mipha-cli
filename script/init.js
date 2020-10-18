@@ -31,11 +31,13 @@ module.exports = async function (params) {
     }
     packageName = tempName
   } else {
-    if (!isIncludeForPackage(params.packageName, params.templatePath)) {
+    packageName = params.packageName.match(/^miphacli-/) ? 
+    params.packageName : `miphacli-${params.packageName}`
+    if (!isIncludeForPackage(packageName, params.templatePath)) {
       log(`请输入正确的模板名`)
       return
     }
-    packageName = params.packageName
+    // packageName = params.packageName
   }
 
 
