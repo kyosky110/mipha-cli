@@ -1,6 +1,6 @@
 {
   "name": "mipha-cli",
-  "version": "0.0.1-dev",
+  "version": "0.0.1",
   "description": "脚手架cli工具",
   "main": "index.js",
   "scripts": {
